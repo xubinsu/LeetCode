@@ -1,0 +1,19 @@
+public class Solution {
+    public int FindPoisonedDuration(int[] timeSeries, int duration) {
+        int sum = 0;//总共的中毒的时间
+        int zhongdu = 0;//当前中毒的时间
+        for(int i=0;i<timeSeries.Length;i++)
+        {
+            if(timeSeries[i]>zhongdu)//如果此时到伤害的时间>中毒的时间，总共的中毒时间直接加上持续时间（完整的一次中毒时间）
+            {
+                sum += duration; 
+            }
+            else
+            {
+                sum += timeSeries[i] + duration -zhongdu;//如果此时收到伤害的时候中毒还没结束，则重置中毒时间，sum+两次中毒时间的差值
+            }
+        zhongdu = timeSeries[i]+duration;//当前的中毒时间=前一次的时间+持续时间
+        }
+        return sum;
+    }
+}
