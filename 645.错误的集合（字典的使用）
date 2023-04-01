@@ -1,0 +1,30 @@
+public class Solution {
+    public int[] FindErrorNums(int[] nums) {
+        int [] result = new int [2];//输出的结果要求为一个数组
+        Dictionary <int,int> dic = new Dictionary<int,int>();//创建字典的格式牢记！！第一个int为key，第二个int为value
+        foreach(int num in nums)//（全部遍历一遍数组）
+        {
+            if(!dic.ContainsKey(num))//如果dic里面没有num这个键,则添加num这个键并且对应的值为1，牢记格式！！！！
+            {
+                dic.Add(num,1);
+            }
+            else
+            {
+                dic[num]++;//如果出现过这个键，说明这个键出现过，所以把这个键的值+1
+            }
+        }
+        for(int i=0;i<=nums.Length;i++)
+        {
+            dic.TryGetValue(i,out int count);//out的作用是输出
+            if(count == 2)
+            {
+                result[0]=i;
+            }
+            else if(count == 0)
+            {
+                result[1]=i;
+            } 
+        }
+        return result;
+    }
+}
