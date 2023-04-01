@@ -1,0 +1,33 @@
+public class Solution {
+    public int ThirdMax(int[] nums) {
+    long max=long.MinValue;
+    long mid=long.MinValue;
+    long third=long.MinValue;
+    for(int i=0;i<nums.Length;i++)
+{
+    if(nums[i]>max)
+    {
+        third=mid;
+        mid=max;
+        max=nums[i];//大于最大的数时三个数都要改变
+    }
+    else if(nums[i]<max&&nums[i]>mid)
+    {
+        third=mid;
+        mid=nums[i];//大于第二大的数时，改变第二和第三大的数
+    }
+    else if(nums[i]<mid && nums[i]>third)
+    {
+        third=nums[i];//大于第三大的数时，改变第三大的数
+    }
+}
+    if(third == long.MinValue)//题目要求，要是没有第三大的数返回最大的数
+    {
+        return (int)max;
+    }
+    else
+    {
+        return (int)third;
+    }
+    }
+}
