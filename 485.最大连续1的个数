@@ -1,0 +1,24 @@
+public class Solution {
+    public int FindMaxConsecutiveOnes(int[] nums) {
+        int Max = 0;//记录最大连续1的个数
+        int temp =0;//记录当前连续1的个数
+        int count = 0;//记录目前记录的最大连续1的个数
+        for(int i=0;i<nums.Length;i++)
+        {
+            if(nums[i] == 1)//当此时遍历的数为1时，当前连续1和目前记录最大连续1个数一起加1
+            {
+                temp++;
+                count = temp;
+            }
+            else if(nums[i] == 0)//当此时遍历的数为0时，清零当前连续1的个数等待下一次连续1
+            {
+                temp = 0;
+            }
+            if(count > Max)//当目前记录的最大的连续1的个数大于最大连续1的个数时，将count值赋值给Max
+            {
+                Max = count;
+            }
+        }
+        return Max;
+    }
+}
