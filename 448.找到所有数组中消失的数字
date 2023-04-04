@@ -1,0 +1,29 @@
+public class Solution {
+    public IList<int> FindDisappearedNumbers(int[] nums) {
+        List <int> result = new List <int>();
+        int temp = 1;//temp用来检测该位置的index是否等于该位置的数
+        int index = 0;//数组的索引
+        Array.Sort(nums);//将数组排序，便于遍历
+        while(index<nums.Length)
+        {
+            if(nums[index] < temp)
+            {
+                index++;//当前索引值小于temp时，往下一个值继续
+            }
+            else if(nums[index] == temp)
+            {
+                index++;
+                temp++;//当前索引值和temp相同时，两个一起加一并且往下一个值继续
+            }
+            else
+            {
+                result.Add(temp);
+                temp++;//如果当前遍历到的数大于temp，说明temp就是消失的数，小于遍历到的数，添加到result中
+            }
+        }
+        for(int i=temp;i<=nums.Length;i++){
+            result.Add(i);//防止消失的数是最大的数的情况，在数组的末尾的情况
+        }
+        return result;
+    }
+}
