@@ -1,0 +1,38 @@
+//整个代码用了四个循环，第一个循环判断是否有1，第二个循环把小于1和大于数组的数都变为1（屏蔽这几个数），第三个循环原地哈希表，第四个循环寻找大于1的数，寻找答案
+public class Solution {
+    public int FirstMissingPositive(int[] nums) {
+        bool oneExist = false;//判断1是否存在的布尔值，默认为false
+        for(int i=0;i<nums.Length;i++)
+        {
+            if(nums[i] == 1)
+            {
+                oneExist = true;//1存在则设为true
+            }
+            else if(nums[i]<1 || nums[i]>nums.Length)
+            {
+                nums[i] = 1;//如果数组中的数为1或是大于数组长度的数，把他们变为1
+            }
+        }
+        if(!oneExist)
+        {
+            return 1;//没有1，则答案返回1
+        }
+        for(int i=0;i<nums.Length;i++)
+        {
+            int num = nums[i];
+            int index = Math.Abs(num)-1;
+            if(nums[index] > 0)
+            {
+                nums[index] = -nums[index];//原地哈希表
+            }
+        }
+        for(int i=0;i<nums.Length;i++)
+        {
+            if(nums[i] >0)
+            {
+                return i+1;//寻找大于1的数，返回i+1即为答案
+            }
+        }
+        return nums.Length+1;//都没有则返回数组长度+1
+    }
+}
